@@ -15,6 +15,7 @@ class Canvas extends React.Component {
 		this.drawBorder = this.drawBorder.bind(this);
 		this.drawCoordinates = this.drawCoordinates.bind(this);
 		this.drawCell = this.drawCell.bind(this);
+		this.draw = this.draw.bind(this);
 	}
 
 	componentDidMount() {
@@ -22,7 +23,17 @@ class Canvas extends React.Component {
 		const ctx = canvas.getContext('2d');
 		this.drawBorder(ctx);
 		this.drawCoordinates(ctx);
+		// create snake
+		// create food
+		setInterval(() => this.draw(ctx) , 600);
 	}
+
+	draw(ctx) {
+		// move snake
+		// draw snake
+		//check for endgame
+	}
+
 
 	drawBorder(ctx) {
 		ctx.beginPath();
