@@ -11,6 +11,7 @@ class Canvas extends React.Component {
 		};
 		this.drawBorder = this.drawBorder.bind(this);
 		this.drawCoordinates = this.drawCoordinates.bind(this);
+		this.drawCell = this.drawCell.bind(this);
 	}
 
 	componentDidMount() {
@@ -44,6 +45,13 @@ class Canvas extends React.Component {
 		}
 		ctx.strokeStyle = '#FF0000';
 		ctx.stroke();
+	}
+
+	drawCell(ctx, x, y) {
+		let x_step = this.state.width/this.state.cols;
+		let y_step = this.state.height/this.state.rows;
+		ctx.fillStyle = 'blue';
+		ctx.fillRect(x, y, x + x_step, y + y_step);
 	}
 
 	render() {
