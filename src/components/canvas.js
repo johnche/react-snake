@@ -49,8 +49,10 @@ class Canvas extends React.Component {
 	}
 
 	drawCell(ctx, x, y) {
-		ctx.fillStyle = 'blue';
-		ctx.fillRect(x, y, x + this.state.x_step, y + this.state.y_step);
+		let xpos = x*this.state.x_step;
+		let ypos = y*this.state.y_step;
+		ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+		ctx.fillRect(xpos, ypos, this.state.x_step, this.state.y_step);
 	}
 
 	render() {
