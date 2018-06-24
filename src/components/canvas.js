@@ -36,25 +36,21 @@ class Canvas extends React.Component {
 
 	drawCoordinates(ctx) {
 		ctx.beginPath();
-		let x_step = this.state.width/this.state.cols;
-		let y_step = this.state.height/this.state.rows;
 		for (let i = 0; i <= this.state.cols; i++) {
-			ctx.moveTo(i*x_step, 0);
-			ctx.lineTo(i*x_step, this.state.height);
+			ctx.moveTo(i*this.state.x_step, 0);
+			ctx.lineTo(i*this.state.x_step, this.state.height);
 		}
 		for (let i = 0; i <= this.state.rows; i++) {
-			ctx.moveTo(0, i*y_step);
-			ctx.lineTo(this.state.width, i*y_step);
+			ctx.moveTo(0, i*this.state.y_step);
+			ctx.lineTo(this.state.width, i*this.state.y_step);
 		}
 		ctx.strokeStyle = '#FF0000';
 		ctx.stroke();
 	}
 
 	drawCell(ctx, x, y) {
-		let x_step = this.state.width/this.state.cols;
-		let y_step = this.state.height/this.state.rows;
 		ctx.fillStyle = 'blue';
-		ctx.fillRect(x, y, x + x_step, y + y_step);
+		ctx.fillRect(x, y, x + this.state.x_step, y + this.state.y_step);
 	}
 
 	render() {
