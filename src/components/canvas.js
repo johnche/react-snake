@@ -9,13 +9,19 @@ class Canvas extends React.Component {
 			rows: this.props.rows,
 			cols: this.props.cols,
 			x_step: this.props.width/this.props.cols,
-			y_step: this.props.height/this.props.rows
+			y_step: this.props.height/this.props.rows,
+			direction: '',
+			snake: []
 		};
 
 		this.drawBorder = this.drawBorder.bind(this);
 		this.drawCoordinates = this.drawCoordinates.bind(this);
 		this.drawCell = this.drawCell.bind(this);
+		this.createSnake = this.createSnake.bind(this);
 		this.draw = this.draw.bind(this);
+		this.moveSnake = this.moveSnake.bind(this);
+		this.drawSnake = this.drawSnake.bind(this);
+		this.snakeShift = this.snakeShift.bind(this);
 	}
 
 	componentDidMount() {
@@ -23,17 +29,45 @@ class Canvas extends React.Component {
 		const ctx = canvas.getContext('2d');
 		this.drawBorder(ctx);
 		this.drawCoordinates(ctx);
-		// create snake
+		this.createSnake(3);
 		// create food
 		setInterval(() => this.draw(ctx) , 600);
 	}
 
 	draw(ctx) {
-		// move snake
-		// draw snake
+		this.moveSnake(this.state.snake);
+		this.drawSnake(ctx, this.state.snake);
 		//check for endgame
 	}
 
+	createSnake(snake_length) {
+		for (var i = 0; i < snake_length; i++) {
+			this.state.snake.push({x: i, y:0});
+		}
+	}
+
+	drawSnake(ctx, snake) {
+		for (var i in snake) {
+			this.drawCell(ctx, snake[i].x, snake[i].y);
+		}
+	}
+
+	moveSnake(snake) {
+		var x = this.state.snake[0].x;
+		var y = this.state.snake[0].y;
+		switch(this.state.direction) {
+			case 'up': y--; break;
+			case 'down': y++; break;
+			case 'left': x--; break;
+			case 'right': x++; break;
+		}
+		this.snakeShift(snake, x, y);
+	}
+
+	snakeShift(snake, snakex, snakey) {
+		snake.push({x: snakex, y: snakey});
+		snake.shift();
+	}
 
 	drawBorder(ctx) {
 		ctx.beginPath();
