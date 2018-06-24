@@ -6,9 +6,12 @@ class Canvas extends React.Component {
 		this.state = {
 			height: this.props.height,
 			width: this.props.width,
-			rows: 10,
-			cols: 10
+			rows: this.props.rows,
+			cols: this.props.cols,
+			x_step: this.props.width/this.props.cols,
+			y_step: this.props.height/this.props.rows
 		};
+
 		this.drawBorder = this.drawBorder.bind(this);
 		this.drawCoordinates = this.drawCoordinates.bind(this);
 		this.drawCell = this.drawCell.bind(this);
